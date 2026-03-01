@@ -20,6 +20,8 @@ Configure o provider no arquivo .env através da variável LLM_PROVIDER.
 import os
 import sys
 import json
+import time
+
 from typing import List, Dict, Any
 from pathlib import Path
 from dotenv import load_dotenv
@@ -198,7 +200,9 @@ def evaluate_prompt(
         precision_scores = []
 
         print("   Avaliando exemplos...")
-
+        
+        RATE_LIMIT_DELAY = 60  # segundos entre exemplos (free tier: 5 req/min)
+        
         for i, example in enumerate(examples[:10], 1):
             result = evaluate_prompt_on_example(prompt_template, example, llm)
 
@@ -212,7 +216,12 @@ def evaluate_prompt(
                 precision_scores.append(precision["score"])
 
                 print(f"      [{i}/{min(10, len(examples))}] F1:{f1['score']:.2f} Clarity:{clarity['score']:.2f} Precision:{precision['score']:.2f}")
-
+                
+        
+            print(f" ...  ")
+            print(f"      ⏳ Aguardando {RATE_LIMIT_DELAY}s (rate limit)...")
+            time.sleep(RATE_LIMIT_DELAY)
+            
         avg_f1 = sum(f1_scores) / len(f1_scores) if f1_scores else 0.0
         avg_clarity = sum(clarity_scores) / len(clarity_scores) if clarity_scores else 0.0
         avg_precision = sum(precision_scores) / len(precision_scores) if precision_scores else 0.0
@@ -311,7 +320,7 @@ def main():
     print("  python src/push_prompts.py\n")
 
     prompts_to_evaluate = [
-        "bug_to_user_story_v2",
+        "bug_to_user_story_v1",
     ]
 
     all_passed = True
