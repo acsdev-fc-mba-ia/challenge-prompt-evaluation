@@ -48,6 +48,16 @@ def save_yaml(data: Dict[str, Any], file_path: str) -> bool:
     Returns:
         True se sucesso, False caso contrário
     """
+    
+    def str_representer(dumper, data):
+        if "\n" in data:
+            return dumper.represent_scalar("tag:yaml.org,2002:str", data, style="|")
+        if "{" in data:
+            return dumper.represent_scalar("tag:yaml.org,2002:str", data, style='"')
+        return dumper.represent_scalar("tag:yaml.org,2002:str", data)
+    yaml.add_representer(str, str_representer)
+    
+    
     try:
         output_file = Path(file_path)
         output_file.parent.mkdir(parents=True, exist_ok=True)
