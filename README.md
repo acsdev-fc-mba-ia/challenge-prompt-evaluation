@@ -1,3 +1,17 @@
+# Técnicas utilisadas
+
+1. Role Prompting
+A persona de "Product Manager Sênior com 10 anos de experiência em metodologias ágeis, especializada em BDD" define quem o modelo deve ser antes de qualquer instrução.
+
+2. Chain of Thought (CoT)
+O PASSO 1 — Classifique o bug instrui o modelo a raciocinar internamente sobre complexidade, ator, problemas e impacto antes de escrever qualquer linha da User Story.
+
+3. Few-shot Learning
+Os 3 exemplos completos (simples → médio → complexo) calibram entrada/saída para cada nível de complexidade, diretamente alinhados com o dataset de referência.
+
+4. Skeleton of Thought
+Os templates SIMPLES / MÉDIO / COMPLEXO estruturam a resposta em seções pré-definidas (User Story → Critérios BDD → Contexto Técnico → Tasks), garantindo que o modelo preencha um esqueleto fixo em vez de inventar estrutura livremente.
+
 # Observações
 
 Foi necessário adicionar um delay de execução no script evalution para evitar o erro abaixo:
