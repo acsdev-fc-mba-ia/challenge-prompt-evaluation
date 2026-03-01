@@ -18,12 +18,12 @@ from langchain import hub
 from langchain_core.prompts import ChatPromptTemplate
 from utils import load_yaml, check_env_vars, print_section_header
 
-PROMPT_REPO = "acsdev/bug_to_user_story_v2"
+HANDLE_NAME = "acsdev"
+PROMPT_REPO = f"{HANDLE_NAME}/bug_to_user_story_v2"
 PROMPT_FILE = Path("prompts/bug_to_user_story_v2.yml")
 REQUIRED_FIELDS = ["system_prompt", "user_prompt"]
 
 load_dotenv()
-
 
 def push_prompt_to_langsmith(prompt_name: str, prompt_data: dict) -> bool:
     """
