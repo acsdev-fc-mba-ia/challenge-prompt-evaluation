@@ -29,22 +29,7 @@ ENV/
 .env
 .env.local
 
-# IDE
 .vscode/
-.idea/
-*.swp
-*.swo
-*~
-.DS_Store
+settings.json
 
-# pytest
-.pytest_cache/
-.coverage
-
-# Logs
-*.log
-
-# Project specific
-screenshots/
-results/
-.claude/
+bug_to_user_story.formated.json
