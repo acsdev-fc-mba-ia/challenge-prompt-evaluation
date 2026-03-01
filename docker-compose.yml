@@ -1,0 +1,9 @@
+services:
+  challenge-prompt-evaluation:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: cpe
+    volumes:
+      - .:/workspace:cached
+    command: sleep infinity
