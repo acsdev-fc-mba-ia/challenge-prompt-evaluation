@@ -32,4 +32,5 @@ ENV/
 .vscode/
 settings.json
 
+raw_prompts.yml
 bug_to_user_story.formated.json
