@@ -18,6 +18,86 @@ Os templates SIMPLES / MÉDIO / COMPLEXO estruturam a resposta em seções pré-
 
 - Link Prompt V2: https://smith.langchain.com/hub/acsdev/bug_to_user_story_v2
 
+- Execução v1 ( FALHA )
+
+```shell
+╭─vscode@c15c76cfe8ea in /workspace/challenge-prompt-evaluation on main ✔ (origin/main +1)
+╰$ python src/evaluate.py
+
+==================================================
+AVALIAÇÃO DE PROMPTS OTIMIZADOS
+==================================================
+
+Provider: openai
+Modelo Principal: gpt-4o-mini
+Modelo de Avaliação: gpt-4o
+
+Criando dataset de avaliação: prompt-optimization-challenge-resolved-eval...
+   ✓ Carregados 15 exemplos do arquivo datasets/bug_to_user_story.jsonl
+   ✓ Dataset criado com 15 exemplos
+
+======================================================================
+PROMPTS PARA AVALIAR
+======================================================================
+
+Este script irá puxar prompts do LangSmith Hub.
+Certifique-se de ter feito push dos prompts antes de avaliar:
+  python src/push_prompts.py
+
+
+🔍 Avaliando: bug_to_user_story_v1
+   Puxando prompt do LangSmith Hub: bug_to_user_story_v1
+   ✓ Prompt carregado com sucesso
+   Dataset: 15 exemplos
+   Avaliando exemplos...
+      [1/10] F1:0.75 Clarity:0.90 Precision:0.90
+      [2/10] F1:0.75 Clarity:0.90 Precision:0.90
+      [3/10] F1:0.75 Clarity:0.90 Precision:0.90
+      [4/10] F1:0.57 Clarity:0.85 Precision:0.83
+      [5/10] F1:0.69 Clarity:0.90 Precision:0.80
+      [6/10] F1:0.80 Clarity:0.85 Precision:0.90
+      [7/10] F1:0.69 Clarity:0.90 Precision:0.83
+      [8/10] F1:0.75 Clarity:0.90 Precision:1.00
+      [9/10] F1:0.80 Clarity:0.90 Precision:1.00
+      [10/10] F1:0.67 Clarity:0.80 Precision:0.67
+
+==================================================
+Prompt: bug_to_user_story_v1
+==================================================
+
+Métricas LangSmith:
+  - Helpfulness: 0.88 ✗
+  - Correctness: 0.80 ✗
+
+Métricas Customizadas:
+  - F1-Score: 0.72 ✗
+  - Clarity: 0.88 ✗
+  - Precision: 0.87 ✗
+
+--------------------------------------------------
+📊 MÉDIA GERAL: 0.8291
+--------------------------------------------------
+
+❌ STATUS: REPROVADO (média < 0.9)
+⚠️  Média atual: 0.8291 | Necessário: 0.9000
+
+==================================================
+RESUMO FINAL
+==================================================
+
+Prompts avaliados: 1
+Aprovados: 0
+Reprovados: 1
+
+⚠️  Alguns prompts não atingiram média >= 0.9
+
+Próximos passos:
+1. Refatore os prompts com score baixo
+2. Faça push novamente: python src/push_prompts.py
+3. Execute: python src/evaluate.py novamente
+```
+
+
 - As images estão na pasta screenshots
     - Imagens que represetam a avaliação da execução do prompt v1
         - prompt01.evaluate.execution.01.img01.png
@@ -60,6 +140,6 @@ Os templates SIMPLES / MÉDIO / COMPLEXO estruturam a resposta em seções pré-
 ### Area de comunicação com o Avaliador
 
 Como não temos uma boa forma de nos comunicar para a avaliação e/ou discução sobre o exercício, peço por favor que coloque
-seguindo o padrão YYYY-MM-MM, nome, mensagem na lista ordenada abaixo. A primeira mensagem é apenas um exemplo:
+seguindo o padrão YYYY-MM-MM, nome, mensagem na lista ordenada abaixo.
 
-1. 2026-03-08, Allan, Message de Exemplo.
+1. 2026-03-08, Allan, Como o prompt V1 que não possui quase detalhe algum, pode ter uma avaliação tão alta?
