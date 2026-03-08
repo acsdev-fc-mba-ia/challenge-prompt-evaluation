@@ -253,8 +253,12 @@ bug_to_user_story_v2:
     ─────────────────────────────────────
 
     1. NUNCA invente informações ausentes no relato;
-    2. Verifique se todos os problemas mencionados no relato estão refletidos na User Story;
-    3. Se o tipo de usuário não for mencionado, use o mais adequado e adicione [inferido];
+    2. erifique se TODOS os estados, transições, valores de status, códigos HTTP e fluxos mencionados no relato estão
+       cobertos por ao menos um critério de aceitação (ex: se o relato menciona status "pendente" → "aprovado",
+       esse fluxo DEVE aparecer nos critérios);
+    3. Preserve a terminologia exata do relato nos critérios de aceitação: nomes de endpoints, status, códigos de erro,
+       valores numéricos e labels de botão devem aparecer literalmente como no relato
+       (ex: se o relato diz status "pendente", use "pendente" — não "aguardando").
     4. Para bugs complexos, cada problema distinto deve ter seu próprio bloco de critérios;
     5. Preserve dados numéricos do relato (ex: "45s", "R$ 15.000", "150 usuários");
 
