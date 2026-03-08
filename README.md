@@ -48,6 +48,10 @@ Os templates SIMPLES / MÉDIO / COMPLEXO estruturam a resposta em seções pré-
     - Não esqueça de por suas credencias no arquivo .env
     - Faça atenção ao array definido na linha 315 do script para decidir qual prompt será avaliado.
         - Foi um opção minha não colocar os dois prompts para serem avalidados em um unica chamada.
+    - No arquivo `.env` escolha o nome o valor da variável LANGSMITH_PROJECT
+        - Escolha um valor para cada execução:
+        - Para o prompt inicial eu deixei o valor: `FC_Challenge_Prompt_Evaluation`
+        - Para o prompt corrigido eu utilisei um padrão `FC_Challenge_Prompt_Evaluation V2.01` onde `01` é o número da execução caso seja necessário executar mais de uma vez.
 
 ### Area de comunicação com o Avaliador
 
