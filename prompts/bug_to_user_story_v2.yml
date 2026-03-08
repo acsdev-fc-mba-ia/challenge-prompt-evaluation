@@ -73,7 +73,7 @@ bug_to_user_story_v2:
     Critérios de Aceitação:
     - Use Dado/Quando/Então (BDD) para descrever o comportamento esperado
     - Use 3-5 critérios de aceitação claros e específicos
-    - Inclua 1 critério para o cenário de erro ou edge case
+    - Inclua ao menos 1 critérios para validar os casos de erro ou edge case
 
     ════════════════════════════════════
     TEMPLATE DE SAÍDA MÉDIO
@@ -90,10 +90,12 @@ bug_to_user_story_v2:
     - [Métricas atuais vs. esperadas, se mencionadas]
     - [Sugestão técnica de resolução, se inferível]
 
+    Apresent os passos necessários para reproduzir o bug, se mencionados no relato.
+
     ### Critérios de Aceitação:
     - Use Dado/Quando/Então (BDD) para descrever o comportamento esperado
     - Use 5-7 critérios de aceitação claros e específicos
-    - Inclua critérios para validar os casos de error
+    - Inclua ao menos 1 critérios para validar os casos de erro ou edge case
 
     ════════════════════════════════════
     TEMPLATE DE SAÍDA COMPLEXO
@@ -111,12 +113,14 @@ bug_to_user_story_v2:
     - [Causa raiz identificada no relato]
     - [Métricas atuais vs. esperadas, se mencionadas]
     - [Sugestão técnica de resolução, se inferível]
+    
+    Apresente os passos necessários para reproduzir o bug, se mencionados no relato.
 
     Para cada problema identificado, crie um bloco separado com seus próprios critérios de aceitação / categoria do problema:
     # Critérios de Aceitação por problema
     - Use Dado/Quando/Então (BDD) para descrever o comportamento esperado
     - Use no mínimo 3 critérios de aceitação claros e específicos
-    - Inclua critérios para validar os casos de erro
+    - Inclua ao menos 1 critérios para validar os casos de erro ou edge case
 
     ───────────────────────────────────────────────────
     # PASSO 3 — Escreva a User Story
@@ -156,33 +160,47 @@ bug_to_user_story_v2:
     ### Exemplo 2 — Complexidade MÉDIA
 
     Relato:
-    > "Relatório de vendas demora mais de 2 minutos para gerar quando filtro
-    > ultrapassa 1000 registros. Query SQL está sem index na coluna data_venda.
-    > Timeout do navegador após 120 segundos. Usuários reclamando de lentidão
-    > no horário comercial."
+    > "Webhook de pagamento aprovado não está sendo chamado.
+    >
+    > Steps to reproduce:
+    > 1. Fazer pedido de R$ 100
+    > 2. Pagar com cartão de crédito
+    > 3. Pagamento é aprovado no gateway
+    > 4. Sistema não recebe notificação
+    > 5. Status do pedido fica como "pendente"
+    >
+    > Logs do gateway mostram: HTTP 500 ao tentar POST /api/webhooks/payment"
 
     User Story gerada:
 
-    # Otimizar geração de relatórios de vendas para grandes volumes de dados
+    # Corrigir recebimento de notificações de pagamento via webhook
 
-    Como um gerente de vendas,
-    eu quero gerar relatórios de vendas rapidamente mesmo com grandes volumes de dados,
-    para que eu possa analisar informações sem esperar longos períodos.
+    Como o sistema de e-commerce [inferido],
+    eu quero receber e processar notificações de pagamento aprovado via webhook,
+    para que o status dos pedidos seja atualizado automaticamente após confirmação do gateway.
 
     ### Contexto Técnico:
-    - Causa raiz: ausência de índice na coluna data_venda
-    - Performance atual: >120s para 1000+ registros | Performance esperada: <30s
-    - Sugestão: adicionar índice na coluna data_venda e otimizar a query SQL
+    - Causa raiz: endpoint /api/webhooks/payment retornando HTTP 500
+    - Comportamento atual: gateway envia notificação mas o sistema não processa
+    - Sugestão: investigar e corrigir o handler do endpoint para retornar HTTP 200
+
+    ### Passos para Reproduzir:
+    1. Fazer pedido de R$ 100
+    2. Pagar com cartão de crédito
+    3. Aguardar aprovação no gateway
+    4. Verificar se sistema recebe a notificação
+    5. Conferir status do pedido — permanece como "pendente"
 
     ### Critérios de Aceitação:
-    - Dado que solicito um relatório com mais de 1000 registros
-    - Quando aplico filtros e clico em "Gerar Relatório"
-    - Então o relatório deve ser gerado em menos de 30 segundos
-    - E não deve ocorrer timeout no navegador
-    - E o desempenho deve ser consistente em horário de pico
-    - Dado que o sistema não consegue gerar o relatório no tempo esperado
-    - Quando ocorre um erro de timeout
-    - Então devo ver uma mensagem de erro clara com orientação sobre o que fazer
+    - Dado que um pagamento é aprovado no gateway
+    - Quando o gateway envia POST para /api/webhooks/payment
+    - Então o endpoint deve retornar HTTP 200
+    - E o status do pedido deve mudar de "pendente" para "aprovado"
+    - E o cliente deve receber confirmação do pedido
+    - Dado que o endpoint /api/webhooks/payment falha ao processar a notificação
+    - Quando ocorre um erro interno
+    - Então o sistema deve registrar o erro em log para investigação
+    - E o gateway deve poder retentar o envio sem gerar duplicidade
 
     ---
 
@@ -203,7 +221,7 @@ bug_to_user_story_v2:
     Como sistema,
     eu quero validar permissões antes de retornar dados de usuários,
     para que apenas usuários autorizados possam acessar informações pessoais de outros usuários.
-    
+
     ### Contexto Técnico:
     - Causa raiz: ausência de validação de permissões no endpoint GET /api/users/:id
     - Comportamento atual: qualquer usuário autenticado acessa dados de qualquer outro usuário
@@ -211,6 +229,7 @@ bug_to_user_story_v2:
     - Sugestão: implementar middleware de autorização validando user_id do token contra o id solicitado
 
     ### Critérios de Aceitação:
+
     - **A. Acesso restrito para usuários comuns:**
       - Dado que sou um usuário comum autenticado
       - Quando tento acessar GET /api/users/:id de outro usuário
