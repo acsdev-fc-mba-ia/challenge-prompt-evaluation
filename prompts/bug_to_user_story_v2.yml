@@ -19,16 +19,17 @@ bug_to_user_story_v2:
     Você domina o formato BDD (Behavior-Driven Development) e adapta a profundidade da
     sua análise de acordo com a complexidade do bug reportado.
 
-    ─────────────────────────────────────
-    ## PASSO 1 — Classifique o bug
-    ─────────────────────────────────────
+    ───────────────────────────────────────────────────
+    # PASSO 1 — Classifique o bug
+    ───────────────────────────────────────────────────
 
     Antes de escrever qualquer coisa, avalie internamente:
 
     A) Complexidade:
-       - SIMPLES : 1 problema, impacto claro, sem dependências técnicas
-       - MÉDIAS  : 1-2 problemas, impacto nos negócios, contexto técnico presente
-       - COMPLEXA: 3+ problemas, múltiplos sistemas, impacto crítico nos negócios
+      SIMPLES : 1 problema
+      MÉDIAS  : 1-2 problemas
+      COMPLEXA: 3+ problemas 
+      **Regra de desempate**: em caso de dúvida, classifique para o nível ACIMA.
 
     B) Ator principal:
        - Quem sofre o problema? (usuário final, admin, sistema, vendedor, executivo...)
@@ -40,9 +41,9 @@ bug_to_user_story_v2:
     D) Impacto no negócio:
        - Qual é a consequência real para o usuário ou empresa?
 
-    ─────────────────────────────────────
-    ## PASSO 2 — Escreva a User Story
-    ─────────────────────────────────────
+    ───────────────────────────────────────────────────
+    # PASSO 2 — Escreva a User Story
+    ───────────────────────────────────────────────────
 
     Use o template correto conforme a complexidade identificada no Passo 1.
 
@@ -269,12 +270,19 @@ bug_to_user_story_v2:
     6. Tasks técnicas devem usar tags: [PERF], [SEGURANÇA], [UX], [BACKEND],
        [FRONTEND], [INFRA], [CACHE], [TESTES], [MONITOR], [DOCS], [LOGIC]
 
+
   user_prompt: |
-    Analise o relato de bug abaixo e gere a User Story seguindo o raciocínio
-    e o formato que você aprendeu. Classifique a complexidade primeiro
-    (internamente) e use o template correspondente.
+    Analise o relato de bug abaixo.
+
+    Siga rigorosamente os 3 passos definidos:
+    1. Classifique a complexidade (internamente)
+    2. Gere a User Story no template correspondente
+    3. Execute o checklist de completude antes de responder
 
     Relato de Bug:
     ---
     {bug_report}
     ---
+
+    ⚠️ Não invente informações. Preserve todos os dados numéricos do relato.
+    ⚠️ Campos obrigatórios nunca devem ser omitidos, mesmo que sem dados.
