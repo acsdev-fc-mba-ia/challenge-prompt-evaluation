@@ -19,10 +19,14 @@ Os templates SIMPLES / MÉDIO / COMPLEXO estruturam a resposta em seções pré-
 - Link Prompt V2: https://smith.langchain.com/hub/acsdev/bug_to_user_story_v2
 
 - As images estão na pasta screenshots
-    - Imagens que represetam a avaliação da execução do prompt
-    - prompt01.evaluate.execution.01.img01.png
-    - prompt01.evaluate.execution.01.img02.png
-    - prompt01.evaluate.execution.01.img03.png
+    - Imagens que represetam a avaliação da execução do prompt v1
+        - prompt01.evaluate.execution.01.img01.png
+        - prompt01.evaluate.execution.01.img02.png
+        - prompt01.evaluate.execution.01.img03.png
+    - Imagens que represetam a avaliação da execução do prompt v2 (primeira vez)
+        - prompt02.evaluate.execution.01.img01.png
+        - prompt02.evaluate.execution.01.img02.png
+        - prompt02.evaluate.execution.01.img03.png
 
 ### C) Seção "Como Executar"
 
