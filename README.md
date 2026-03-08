@@ -14,6 +14,16 @@ Os templates SIMPLES / MÉDIO / COMPLEXO estruturam a resposta em seções pré-
 
 ### B) Seção "Resultados Finais"
 
+- Link Prompt V1: https://smith.langchain.com/hub/acsdev/bug_to_user_story_v1
+
+- Link Prompt V2: https://smith.langchain.com/hub/acsdev/bug_to_user_story_v2
+
+- As images estão na pasta screenshots
+    - Imagens que represetam a avaliação da execução do prompt
+    - prompt01.evaluate.execution.01.img01.png
+    - prompt01.evaluate.execution.01.img02.png
+    - prompt01.evaluate.execution.01.img03.png
+
 ### C) Seção "Como Executar"
 
 1. Abra o projeto no vscode
@@ -25,6 +35,7 @@ Os templates SIMPLES / MÉDIO / COMPLEXO estruturam a resposta em seções pré-
 4. Execute o comando `python src/pull_prompts.py` e veja o resultado do pull no arquivo raw_prompts.
     - ANTES DE EXECUTAR
     - Não esqueça de por suas credencias no arquivo .env
+    - O arquivo é gerado em `prompts/raw_prompts.yml`
 
 5. Execute o comando `python src/push_prompts.py` e veja o resultado no console.
     - ANTES DE EXECUTAR
@@ -35,16 +46,12 @@ Os templates SIMPLES / MÉDIO / COMPLEXO estruturam a resposta em seções pré-
 6. Execute o comando `python src/evaluate.py` para rodar o evaluation no LangSmith
     - ANTES DE EXECUTAR
     - Não esqueça de por suas credencias no arquivo .env
-    - Remova o código para que força o delay, linhas 204, 221, 222, 223 que usei para não estourar free-tier do Gemini
+    - Faça atenção ao array definido na linha 315 do script para decidir qual prompt será avaliado.
+        - Foi um opção minha não colocar os dois prompts para serem avalidados em um unica chamada.
 
-## Observações
+### Area de comunicação com o Avaliador
 
-Foi necessário adicionar um delay de execução no script evalution para evitar o erro abaixo:
-```google.api_core.exceptions.ResourceExhausted: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. 
-* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 5, model: gemini-2.5-flash
+Como não temos uma boa forma de nos comunicar para a avaliação e/ou discução sobre o exercício, peço por favor que coloque
+seguindo o padrão YYYY-MM-MM, nome, mensagem na lista ordenada abaixo. A primeira mensagem é apenas um exemplo:
 
-```
-
-Foi necessário tb alterar versões de biblioteca.
-- langchain-google-genai>=2.1.0
-- google-genai>=0.1.0
+1. 2026-03-08, Allan, Message de Exemplo.
